@@ -10,6 +10,9 @@ const tickets = ["1", "2"];
 
 app.use(async ctx => {
     const { method } = ctx.request.querystring;
+    ctx.response.set({
+        'Access-Control-Allow-Origin': '*',
+    });
     switch (method) {
         case 'allTickets':
             ctx.response.body = tickets;
