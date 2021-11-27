@@ -14,21 +14,8 @@ app.use(koaBody({
 const tickets = ["1", "2"];
 
 app.use(async ctx => {
-    const { method } = ctx.request.querystring;
-    ctx.response.set({
-        'Access-Control-Allow-Origin': '*',
-    });
-    switch (method) {
-        case 'allTickets':
-            ctx.response.body = tickets;
+    ctx.response.body = tickets;
             return;
-        
-
-        // TODO: обработка остальных методов
-        default:
-            ctx.response.status = 404;
-            return;
-    }
 });
 
 const server = http.createServer(app.callback()).listen(port);
