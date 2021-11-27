@@ -4,7 +4,10 @@ const koaBody = require('koa-body');
 const app = new Koa();
 const port = process.env.PORT || 7070
 
-app.use(koaBody({urlencoded: true}));
+app.use(koaBody({
+    urlencoded: true,
+    multipart: true,
+}));
 
 const tickets = ["1", "2"];
 
@@ -27,4 +30,3 @@ app.use(async ctx => {
 });
 
 const server = http.createServer(app.callback()).listen(port);
-
