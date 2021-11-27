@@ -55,10 +55,6 @@ app.use(async ctx => {
   });
   
     switch (method) {
-      case 'allTickets':
-        console.log(method);
-        ctx.response.body = tickets;
-        return;
       default:
         ctx.response.body = method;
         return;
