@@ -56,7 +56,7 @@ app.use(async ctx => {
   
     switch (method) {
       default:
-        ctx.response.body = method;
+        ctx.response.body = tickets;
         return;
     }
 });
