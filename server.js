@@ -51,9 +51,13 @@ app.use(async ctx => {
     console.log(method);
 
     switch (method) {
-        default:
-            ctx.response.body = ctx.request.querystring;;
-            return;
+      case 'allTickets':
+        console.log(method);
+        ctx.response.body = tickets;
+        return;
+      default:
+        ctx.response.body = ctx.request.querystring;
+        return;
     }
 });
 
