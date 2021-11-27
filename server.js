@@ -1,5 +1,3 @@
-import FullTicket from './fullTicket';
-
 const http = require('http');
 const Koa = require('koa');
 const koaBody = require('koa-body');
@@ -9,6 +7,30 @@ const port = process.env.PORT || 7070
 app.use(koaBody({
     urlencoded: true,
 }));
+
+class Ticket {
+    constructor(name, status, id, created) {
+      this.name = name;
+      this.status = status;
+      this.created = created;
+      this.id = id;
+    }
+};
+
+class FullTicket {
+    constructor(name, status, description, id) {
+      this.name = name;
+      this.status = status;
+      this.description = description;
+      this.id = id;
+      this.created = new Date().getTime();
+    }
+  
+    createTicket() {
+      return new Ticket(this.name, this.status, this.id, this.created);
+    }
+};
+
 
 let id = 1000;
 const tickets = [];
