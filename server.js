@@ -1,3 +1,5 @@
+import Ticket from './ticket';
+
 const http = require('http');
 const Koa = require('koa');
 const koaBody = require('koa-body');
