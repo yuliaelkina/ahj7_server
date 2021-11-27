@@ -45,13 +45,15 @@ createTickets('Task1', 'false', 'Task 1 description should be here');
 createTickets('Task2', 'false', 'Task 2 description should be here');
 
 
-ctx.response.set({
-  'Access-Control-Allow-Origin': '*',
-});
+
 
 app.use(async ctx => {
     const { method } = ctx.request.querystring;
 
+  ctx.response.set({
+    'Access-Control-Allow-Origin': '*',
+  });
+  
     switch (method) {
       case 'allTickets':
         console.log(method);
