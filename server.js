@@ -48,7 +48,6 @@ console.log(fullTickets);
 
 app.use(async ctx => {
     const { method } = ctx.request.querystring;
-    console.log(method);
 
     switch (method) {
       case 'allTickets':
@@ -56,7 +55,7 @@ app.use(async ctx => {
         ctx.response.body = tickets;
         return;
       default:
-        ctx.response.body = ctx.request.querystring;
+        ctx.response.body = method;
         return;
     }
 });
