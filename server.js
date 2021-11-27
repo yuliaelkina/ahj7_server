@@ -31,13 +31,6 @@ class FullTicket {
     }
 };
 
-
-let id = 1000;
-const tickets = [];
-const fullTickets = [];
-createTickets('Task1', 'false', 'Task 1 description should be here');
-createTickets('Task2', 'false', 'Task 2 description should be here');
-
 function createTickets(name, status, description) {
     const ticket = new FullTicket(name, status, description, id);
     id += 1;
@@ -45,8 +38,11 @@ function createTickets(name, status, description) {
     tickets.push(ticket.createTicket());
 }
 
-
-
+let id = 1000;
+const tickets = [];
+const fullTickets = [];
+createTickets('Task1', 'false', 'Task 1 description should be here');
+createTickets('Task2', 'false', 'Task 2 description should be here');
 
 app.use(async ctx => {
     const { method } = ctx.request.querystring;
@@ -54,7 +50,7 @@ app.use(async ctx => {
 
     switch (method) {
         default:
-            ctx.response.status = ctx.request.querystring;;
+            ctx.response.body = ctx.request.querystring;;
             return;
     }
 });
