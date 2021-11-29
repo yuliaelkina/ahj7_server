@@ -80,10 +80,10 @@ class TicketsController {
 
   findTicket(id) {
     if (this.fullTickets.find((el) => {
-        el.id === id;
+        el.id == id;
     })) {
         return this.fullTickets.find((el) => {
-            el.id === id
+            el.id == id;
         });
     } else {
         return "Ticket with this Id doesn't exist";
