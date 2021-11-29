@@ -52,12 +52,16 @@ class TicketsController {
     this.fullTickets = [];
   }
 
-  createTickets(string) {
-    return string;
-   //const ticket = new FullTicket(name, status, description, this.id);
-    //this.id += 1;
-    //this.fullTickets.push(ticket);
-    //this.tickets.push(ticket.createTicket());
+  createTickets(name, status, description) {
+    if (name && status && description) {
+        const ticket = new FullTicket(name, status, description, this.id);
+        this.id += 1;
+        this.fullTickets.push(ticket);
+        this.tickets.push(ticket.createTicket());
+        return "ticket created";
+    } else {
+        return "uncorrect data";
+    }
   }
 
   deleteTickets(id) {
