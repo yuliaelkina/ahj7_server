@@ -2,6 +2,7 @@ const http = require('http');
 const Koa = require('koa');
 const koaBody = require('koa-body');
 const app = new Koa();
+const cors = require('koa2-cors');
 const port = process.env.PORT || 7070
 
 app.use(koaBody({
@@ -61,16 +62,19 @@ const fullTickets = [];
 createTickets('Task1', 'false', 'Task 1 description should be here');
 createTickets('Task2', 'false', 'Task 2 description should be here');
 
-
-
+app.use(
+  cors({
+    origin: '*',
+    credentials: true,
+    'Access-Control-Allow-Origin': true,
+    allowMethods: ['GET', 'POST', 'PUT', 'DELETE','OPTIONS'],
+  })
+)
 
 app.use(async ctx => {
   let method;
   if (ctx.request.method === 'GET') ({ method } = ctx.request.query);
   else if (ctx.request.method === 'POST') ({ method } = ctx.request.body);
-  ctx.response.set({
-    'Access-Control-Allow-Origin': '*',
-  });
   switch (method) {
     case 'allTickets': ctx.response.body = tickets;
       break;
