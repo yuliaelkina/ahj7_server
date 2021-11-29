@@ -86,7 +86,7 @@ class TicketsController {
             el.id == parseInt(id);
         });
     } else {
-        return "Ticket with this Id doesn't exist";
+        return id;
     }
   }; 
 
