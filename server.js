@@ -65,11 +65,9 @@ createTickets('Task2', 'false', 'Task 2 description should be here');
 
 
 app.use(async ctx => {
-  if (ctx.request.method === 'GET') {
-    const { method } = ctx.request.query;
-  } else if (ctx.request.method === 'POST') {
-    const { method } = ctx.request.body;
-  }
+  let method;
+  if (ctx.request.method === 'GET') ({ method } = ctx.request.query);
+  else if (ctx.request.method === 'POST') ({ method } = ctx.request.body);
   ctx.response.set({
     'Access-Control-Allow-Origin': '*',
   });
