@@ -70,12 +70,16 @@ class TicketsController {
       }), 1);
       return "deleted";
     } else {
-      return "Ticket with this Id doesn't exist"
+      return "Ticket with this Id doesn't exist";
     }
   }
 
   findTicket(id) {
-    return this.fullTickets[id];
+    if (this.fullTickets[id]) {
+        return this.fullTickets[id];
+    } else {
+        return "Ticket with this Id doesn't exist";
+    }
   }; 
 
 }
