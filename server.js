@@ -3,7 +3,7 @@ const Koa = require('koa');
 const koaBody = require('koa-body');
 const app = new Koa();
 const cors = require('koa2-cors');
-const port = process.env.PORT || 7070
+const port = process.env.PORT || 7070;
 
 app.use(koaBody({
     urlencoded: true,
@@ -11,6 +11,15 @@ app.use(koaBody({
     text: true,
     json: true,
 }));
+
+app.use(
+  cors({
+    origin: '*',
+    credentials: true,
+    'Access-Control-Allow-Origin': true,
+    allowMethods: ['GET', 'POST', 'PUT', 'DELETE','OPTIONS'],
+  })
+);
 
 class Ticket {
     constructor(name, status, id, created) {
@@ -76,9 +85,6 @@ ticketsController.createTickets('Task2', 'false', 'Task 2 description should be 
 
 
 app.use(async ctx => {
-  ctx.response.set({
-    'Access-Control-Allow-Origin': '*',
-  });
   let method;
   if (ctx.request.method === 'GET') ({ method } = ctx.request.query);
   else if (ctx.request.method === 'POST') ({ method } = ctx.request.body);
