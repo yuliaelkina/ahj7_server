@@ -74,16 +74,14 @@ const ticketsController = new TicketsController();
 ticketsController.createTickets('Task1', 'false', 'Task 1 description should be here');
 ticketsController.createTickets('Task2', 'false', 'Task 2 description should be here');
 
-app.use(
+
+app.use(async ctx => {
   cors({
     origin: '*',
     credentials: true,
     'Access-Control-Allow-Origin': '*',
     allowMethods: ['GET', 'POST', 'PUT', 'DELETE','OPTIONS'],
   })
-)
-
-app.use(async ctx => {
   let method;
   if (ctx.request.method === 'GET') ({ method } = ctx.request.query);
   else if (ctx.request.method === 'POST') ({ method } = ctx.request.body);
