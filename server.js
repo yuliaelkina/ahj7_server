@@ -76,12 +76,9 @@ ticketsController.createTickets('Task2', 'false', 'Task 2 description should be 
 
 
 app.use(async ctx => {
-  cors({
-    origin: '*',
-    credentials: true,
+  ctx.response.set({
     'Access-Control-Allow-Origin': '*',
-    allowMethods: ['GET', 'POST', 'PUT', 'DELETE','OPTIONS'],
-  })
+  });
   let method;
   if (ctx.request.method === 'GET') ({ method } = ctx.request.query);
   else if (ctx.request.method === 'POST') ({ method } = ctx.request.body);
