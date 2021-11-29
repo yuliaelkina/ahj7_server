@@ -52,8 +52,8 @@ class TicketsController {
     this.fullTickets = [];
   }
 
-  createTickets(name, status, description) {
-    return `${name}, ${status}, ${description}`;
+  createTickets(string) {
+    return string;
    //const ticket = new FullTicket(name, status, description, this.id);
     //this.id += 1;
     //this.fullTickets.push(ticket);
@@ -91,9 +91,9 @@ app.use(async ctx => {
   switch (method) {
     case 'allTickets': ctx.response.body = ticketsController.tickets;
       break;
-    case 'ticketById': ctx.response.body = ticketsController.findTicket(id);
+    case 'ticketById': ctx.response.body = ticketsController.findTicket(ctx.request.query);
       break;
-    case 'createTicket': ctx.response.body = ticketsController.createTickets(name, status, description);
+    case 'createTicket': ctx.response.body = ticketsController.createTickets(ctx.request.body);
       break;
     case 'changeStatus': ctx.response.body = ticketsController.changeStatus(ctx.request.body);
       break;
