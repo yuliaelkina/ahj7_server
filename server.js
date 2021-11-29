@@ -67,10 +67,10 @@ class TicketsController {
   deleteTickets(id) {
     if (tickets[id]) {
       this.tickets.splise(this.tickets.findIndex((el) => {
-        el.id = id;
+        el.id === id;
       }), 1);
       this.fullTickets.splise(this.fullTickets.findIndex((el) => {
-        el.id = id;
+        el.id ==== id;
       }), 1);
       return "deleted";
     } else {
@@ -80,10 +80,10 @@ class TicketsController {
 
   findTicket(id) {
     if (this.fullTickets.find((el) => {
-        el.id == id;
+        el.id === parseInt(id);
     })) {
         return this.fullTickets.find((el) => {
-            el.id == id;
+            el.id == parseInt(id);
         });
     } else {
         return "Ticket with this Id doesn't exist";
