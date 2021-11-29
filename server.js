@@ -54,8 +54,8 @@ class TicketsController {
 
   createTickets(name, status, description) {
     if (name && status && description) {
-        const ticket = new FullTicket(name, status, description, this.id);
-        this.id += 1;
+        const ticket = new FullTicket(name, status, description, this.index);
+        this.index += 1;
         this.fullTickets.push(ticket);
         this.tickets.push(ticket.createTicket());
         return "ticket created";
