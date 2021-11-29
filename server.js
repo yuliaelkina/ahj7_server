@@ -74,8 +74,8 @@ class TicketsController {
     }
   }
 
-  findTicket(string) {
-    return string;
+  findTicket(id) {
+    return id;
   }; 
 
 }
@@ -91,7 +91,7 @@ app.use(async ctx => {
   switch (method) {
     case 'allTickets': ctx.response.body = ticketsController.tickets;
       break;
-    case 'ticketById': ctx.response.body = ticketsController.findTicket(ctx.request.query);
+    case 'ticketById': ctx.response.body = ticketsController.findTicket(ctx.request.query.id);
       break;
     case 'createTicket': ctx.response.body = ticketsController.createTickets(ctx.request.body);
       break;
