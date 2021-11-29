@@ -29,38 +29,50 @@ class FullTicket {
       this.id = id;
       this.created = new Date().getTime();
     }
-  
+
     createTicket() {
       return new Ticket(this.name, this.status, this.id, this.created);
     }
+
 };
 
-function createTickets(name, status, description) {
-    const ticket = new FullTicket(name, status, description, id);
-    id += 1;
-    fullTickets.push(ticket);
-    tickets.push(ticket.createTicket());
+class TicketsController {
+  constructor() {
+    this.index = 1000;
+    this.tickets = [];
+    this.fullTickets = [];
+  }
+
+  createTickets(name, status, description) {
+    return `${name}, ${status}, ${description}`;
+   //const ticket = new FullTicket(name, status, description, this.id);
+    //this.id += 1;
+    //this.fullTickets.push(ticket);
+    //this.tickets.push(ticket.createTicket());
+  }
+
+  deleteTickets(id) {
+    if (tickets[id]) {
+      this.tickets.splise(this.tickets.findIndex((el) => {
+        el.id = id;
+      }), 1);
+      this.fullTickets.splise(this.fullTickets.findIndex((el) => {
+        el.id = id;
+      }), 1);
+      return "deleted";
+    } else {
+      return "Ticket with this Id doesn't exist"
+    }
+  }
+
+  findTicket(string) {
+    return string;
+  }; 
+
 }
-
-function deleteTickets(id) {
-  
-  tickets.splise(tickets.findIndex((el) => {
-    el.id = id;
-  }), 1);
-  fullTickets.splise(fullTickets.findIndex((el) => {
-    el.id = id;
-  }), 1);
-}
-
-function findTicket(string) {
-  return string;
-};
-
-let id = 1000;
-const tickets = [];
-const fullTickets = [];
-createTickets('Task1', 'false', 'Task 1 description should be here');
-createTickets('Task2', 'false', 'Task 2 description should be here');
+const ticketsController = new TicketsController();
+ticketsController.createTickets('Task1', 'false', 'Task 1 description should be here');
+ticketsController.createTickets('Task2', 'false', 'Task 2 description should be here');
 
 app.use(
   cors({
@@ -76,11 +88,11 @@ app.use(async ctx => {
   if (ctx.request.method === 'GET') ({ method } = ctx.request.query);
   else if (ctx.request.method === 'POST') ({ method } = ctx.request.body);
   switch (method) {
-    case 'allTickets': ctx.response.body = tickets;
+    case 'allTickets': ctx.response.body = ticketsController.tickets;
       break;
     case 'ticketById': ctx.response.body = findTicket(id);
       break;
-    case 'createTicket': ctx.response.body = createTickets(ctx.request.body);
+    case 'createTicket': ctx.response.body = ticketsController.createTickets(name, status, description);
       break;
     case 'changeStatus': ctx.response.body = ticketsController.changeStatus(ctx.request.body);
       break;
