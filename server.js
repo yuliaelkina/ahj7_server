@@ -75,7 +75,7 @@ class TicketsController {
   }
 
   findTicket(id) {
-    return id;
+    return this.fullTickets[id];
   }; 
 
 }
