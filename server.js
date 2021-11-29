@@ -70,7 +70,7 @@ class TicketsController {
         el.id === id;
       }), 1);
       this.fullTickets.splise(this.fullTickets.findIndex((el) => {
-        el.id ==== id;
+        el.id === id;
       }), 1);
       return "deleted";
     } else {
