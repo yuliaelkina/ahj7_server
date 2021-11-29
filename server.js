@@ -80,10 +80,10 @@ class TicketsController {
 
   findTicket(id) {
     if (this.fullTickets.find((el) => {
-        el.id === parseInt(id);
+        el.id === Number.parseInt(id);
     })) {
         return this.fullTickets.find((el) => {
-            el.id == parseInt(id);
+            el.id === Number.parseInt(id);
         });
     } else {
         return id;
