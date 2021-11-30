@@ -68,10 +68,10 @@ class TicketsController {
     if (this.tickets.findIndex((el) => {
         el.id === parseInt(id);
       })) {
-      this.tickets.splise(this.tickets.findIndex((el) => {
+      this.tickets.splice(this.tickets.findIndex((el) => {
         el.id === parseInt(id);
       }), 1);
-      this.fullTickets.splise(this.fullTickets.findIndex((el) => {
+      this.fullTickets.splice(this.fullTickets.findIndex((el) => {
         el.id === parseInt(id);
       }), 1);
       return "deleted";
