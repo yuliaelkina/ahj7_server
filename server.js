@@ -65,12 +65,14 @@ class TicketsController {
   }
 
   deleteTickets(id) {
-    if (tickets[id]) {
+    if (this.tickets.findIndex((el) => {
+        el.id === parseInt(id);
+      })) {
       this.tickets.splise(this.tickets.findIndex((el) => {
-        el.id === id;
+        el.id === parseInt(id);
       }), 1);
       this.fullTickets.splise(this.fullTickets.findIndex((el) => {
-        el.id === id;
+        el.id === parseInt(id);
       }), 1);
       return "deleted";
     } else {
