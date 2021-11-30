@@ -88,9 +88,9 @@ class TicketsController {
   }
   
   changeStatus(id, status) {
-      return id;
       const fullTicket = this.fullTickets.find((el) => el.id === parseInt(id));
       const ticket = this.tickets.find((el) => el.id === parseInt(id));
+      return ticket;
       ticket.status = status;
       fullTicket.status = status;
       return ticket.status;
