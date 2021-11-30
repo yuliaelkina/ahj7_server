@@ -79,7 +79,7 @@ class TicketsController {
   }
 
   findTicket(id) {
-        return this.fullTickets, id;
+        return JSON.stringify(this.fullTickets), id;
   } 
 }
 const ticketsController = new TicketsController();
