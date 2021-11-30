@@ -116,7 +116,7 @@ app.use(async ctx => {
       break;
     case 'createTicket': ctx.response.body = ticketsController.createTickets(ctx.request.body);
       break;
-    case 'changeStatus': ctx.response.body = ticketsController.changeStatus(ctx.request.body);
+    case 'changeStatus': ctx.response.body = ticketsController.changeStatus(ctx.request.body.id, ctx.request.body.status);
       break;
     case 'updateTicket': ctx.response.body = ticketsController.updateTicket(ctx.request.body);
       break;
