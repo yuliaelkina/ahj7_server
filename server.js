@@ -80,7 +80,7 @@ class TicketsController {
 
   findTicket(id) {
       const answer = this.fullTickets.find((el) => el.id === parseInt(id));
-      if (answer) {
+      if (answer != undefined) {
         return answer;
       } else {
           return "ticket with this Id doesn't exist";
