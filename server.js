@@ -79,7 +79,7 @@ class TicketsController {
   }
 
   findTicket(id) {
-      const answer = this.fullTickets;
+      const answer = parseInt(id);
       if (answer) {
         return answer;
       } else {
