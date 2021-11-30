@@ -96,7 +96,7 @@ app.use(async ctx => {
   switch (method) {
     case 'allTickets': ctx.response.body = ticketsController.tickets;
       break;
-    case 'ticketById': ctx.response.body = ticketsController.findTicket(ctx.request.query.id);
+    case 'ticketById': ctx.response.body = ticketsController.findTicket(parseInt(ctx.request.query.id));
       break;
     case 'createTicket': ctx.response.body = ticketsController.createTickets(ctx.request.body);
       break;
