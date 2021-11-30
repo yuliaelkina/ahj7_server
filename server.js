@@ -126,7 +126,7 @@ app.use(async ctx => {
       break;
     case 'updateTicket': ctx.response.body = ticketsController.updateTicket(ctx.request.body);
       break;
-    case 'deleteTicket': ctx.response.body = ticketsController.deleteTicket(ctx.request.body);
+    case 'deleteTicket': ctx.response.body = ticketsController.deleteTickets(ctx.request.body.id);
       break;
     default:
       ctx.response.status = 400;
