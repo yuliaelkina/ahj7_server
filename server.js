@@ -86,8 +86,7 @@ class TicketsController {
             el.id === parseInt(id);
         });
     } else {
-        return this.fullTickets.find((el) => {
-            el.id === parseInt(id);
+        return typeOf(id), parseInt(id);
         });
     }
   }; 
