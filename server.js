@@ -79,9 +79,7 @@ class TicketsController {
   }
 
   findTicket(id) {
-        return this.fullTickets.find((el) => {
-            el.id === id;
-    });
+        return this.fullTickets, id;
   } 
 }
 const ticketsController = new TicketsController();
