@@ -54,7 +54,7 @@ class TicketsController {
 
   createTickets(name, status, description) {
     if (name && status && description) {
-        const ticket = new FullTicket(name, status, description, this.index);
+        const ticket = new FullTicket(name, status, description, toString(this.index));
         this.index += 1;
         this.fullTickets.push(ticket);
         this.tickets.push(ticket.createTicket());
@@ -80,10 +80,10 @@ class TicketsController {
 
   findTicket(id) {
     if (this.fullTickets.find((el) => {
-        el.id === parseInt(id);
-    }) !== undefined) {
+        el.id === id;
+    })) {
         return this.fullTickets.find((el) => {
-            el.id === parseInt(id);
+            el.id === id;
         });
     } else {
         return id;
