@@ -65,15 +65,11 @@ class TicketsController {
   }
 
   deleteTickets(id) {
-    if (this.tickets.findIndex((el) => {
-        el.id === parseInt(id);
-      })) {
-      this.tickets.splice(this.tickets.findIndex((el) => {
-        el.id === parseInt(id);
-      }), 1);
-      this.fullTickets.splice(this.fullTickets.findIndex((el) => {
-        el.id === parseInt(id);
-      }), 1);
+    const fullTicket = this.fullTickets.find((el) => el.id === parseInt(id));
+    const ticket = this.tickets.find((el) => el.id === parseInt(id));
+       if (ticket && fullTicket) {
+      this.tickets.splice(ticket, 1);
+      this.fullTickets.splice(fullTicket, 1);
       return "deleted";
     } else {
       return "Ticket with this Id doesn't exist";
