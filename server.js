@@ -87,7 +87,6 @@ class TicketsController {
         });
     } else {
         return typeOf(id), parseInt(id);
-        });
     }
   }; 
 
