@@ -79,7 +79,7 @@ class TicketsController {
   }
 
   findTicket(id) {
-      const answer = this.fullTickets.find((el) => el.id == id);
+      const answer = this.fullTickets;
       if (answer) {
         return answer;
       } else {
