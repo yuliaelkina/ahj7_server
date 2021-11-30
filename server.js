@@ -102,8 +102,8 @@ class TicketsController {
 
 }
 const ticketsController = new TicketsController();
-ticketsController.createTickets('Task1', false, 'Task 1 description should be here');
-ticketsController.createTickets('Task2', false, 'Task 2 description should be here');
+ticketsController.createTickets('Task1', 'false', 'Task 1 description should be here');
+ticketsController.createTickets('Task2', 'false', 'Task 2 description should be here');
 
 
 app.use(async ctx => {
