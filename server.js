@@ -95,8 +95,8 @@ class TicketsController {
       return ticket.status;
   }
     
-  updateTicket() {
-      
+  updateTicket(...args) {
+      return [...args];
   }
 
 }
