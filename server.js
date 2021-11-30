@@ -79,17 +79,10 @@ class TicketsController {
   }
 
   findTicket(id) {
-    if (this.fullTickets.find((el) => {
-        el.id === id;
-    })) {
         return this.fullTickets.find((el) => {
             el.id === id;
-        });
-    } else {
-        return id;
-    }
-  }; 
-
+    });
+  } 
 }
 const ticketsController = new TicketsController();
 ticketsController.createTickets('Task1', 'false', 'Task 1 description should be here');
