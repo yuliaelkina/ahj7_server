@@ -97,8 +97,18 @@ class TicketsController {
       }
   }
     
-  updateTicket(...args) {
-      return [...args];
+  updateTicket(id, name, description) {
+       const fullTicket = this.fullTickets.find((el) => el.id === parseInt(id));
+      const ticket = this.tickets.find((el) => el.id === parseInt(id));
+      if (ticket && fullTicket) {
+          ticket.name = name;
+          ticket.description = description;
+          fullTicket.name = name;
+          fullTicket.description = description;
+          return "ticket changed";
+      } else {
+          return "ticket with this Id doesn't exist";
+      }
   }
 
 }
@@ -120,7 +130,7 @@ app.use(async ctx => {
       break;
     case 'changeStatus': ctx.response.body = ticketsController.changeStatus(ctx.request.body.id, ctx.request.body.status);
       break;
-    case 'updateTicket': ctx.response.body = ticketsController.updateTicket(ctx.request.body);
+    case 'updateTicket': ctx.response.body = ticketsController.updateTicket(ctx.request.body.id, ctx.request.body.name, ctx.request.body.description);
       break;
     case 'deleteTicket': ctx.response.body = ticketsController.deleteTickets(ctx.request.body.id);
       break;
