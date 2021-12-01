@@ -107,7 +107,6 @@ class TicketsController {
     const ticket = this.tickets.find((el) => el.id === parseInt(id));
     if (ticket && fullTicket) {
       ticket.name = name;
-      ticket.description = description;
       fullTicket.name = name;
       fullTicket.description = description;
       return ticket.name;
