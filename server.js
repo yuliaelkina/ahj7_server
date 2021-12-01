@@ -110,12 +110,12 @@ class TicketsController {
       ticket.description = description;
       fullTicket.name = name;
       fullTicket.description = description;
-      return "ticket changed";
+      return ticket.name;
     } else {
       return "ticket with this Id doesn't exist";
     }
   }
-  
+
 }
 const ticketsController = new TicketsController();
 ticketsController.createTickets('Task1', 'false', 'Task 1 description should be here');
