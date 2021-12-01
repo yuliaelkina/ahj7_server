@@ -130,7 +130,7 @@ app.use(async ctx => {
       break;
     case 'ticketById': ctx.response.body = ticketsController.findTicket(ctx.request.query.id);
       break;
-    case 'createTicket': ctx.response.body = ticketsController.createTickets(ctx.request.body.name, ctx.request.body.status, ctx.request.body.description);
+    case 'createTicket': ctx.response.body = ticketsController.createTickets(ctx.request.body.name, 'false', ctx.request.body.description);
       break;
     case 'changeStatus': ctx.response.body = ticketsController.changeStatus(ctx.request.body.id, ctx.request.body.status);
       break;
