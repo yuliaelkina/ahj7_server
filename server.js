@@ -85,12 +85,17 @@ class TicketsController {
       }
   }
   
-  changeStatus(id, status) {
+  changeStatus(id) {
       const fullTicket = this.fullTickets.find((el) => el.id === parseInt(id));
       const ticket = this.tickets.find((el) => el.id === parseInt(id));
       if (ticket && fullTicket) {
-        ticket.status = status;
-        fullTicket.status = status;
+        if (ticket.status === 'true') {
+          ticket.status = 'false';
+          fullTicket.status = 'false';
+        } else {
+          ticket.status = 'true';
+          fullTicket.status = 'true';
+        }
         return ticket.status;
       } else {
           return "something went wrong"
@@ -141,3 +146,4 @@ app.use(async ctx => {
 });
 
 const server = http.createServer(app.callback()).listen(port);
+
