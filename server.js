@@ -103,19 +103,19 @@ class TicketsController {
   }
     
   updateTicket(id, name, description) {
-       const fullTicket = this.fullTickets.find((el) => el.id === parseInt(id));
-      const ticket = this.tickets.find((el) => el.id === parseInt(id));
-      if (ticket && fullTicket) {
-          ticket.name = name;
-          ticket.description = description;
-          fullTicket.name = name;
-          fullTicket.description = description;
-          return "ticket changed";
-      } else {
-          return "ticket with this Id doesn't exist";
-      }
+    const fullTicket = this.fullTickets.find((el) => el.id === parseInt(id));
+    const ticket = this.tickets.find((el) => el.id === parseInt(id));
+    if (ticket && fullTicket) {
+      ticket.name = name;
+      ticket.description = description;
+      fullTicket.name = name;
+      fullTicket.description = description;
+      return "ticket changed";
+    } else {
+      return "ticket with this Id doesn't exist";
+    }
   }
-
+  
 }
 const ticketsController = new TicketsController();
 ticketsController.createTickets('Task1', 'false', 'Task 1 description should be here');
@@ -146,4 +146,3 @@ app.use(async ctx => {
 });
 
 const server = http.createServer(app.callback()).listen(port);
-
