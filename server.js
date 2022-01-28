@@ -1,8 +1,10 @@
 const http = require('http');
 const Koa = require('koa');
+const Router = require('koa-router');
 const koaBody = require('koa-body');
 const app = new Koa();
 const cors = require('koa2-cors');
+const router = new Router();
 const port = process.env.PORT || 7070;
 
 app.use(koaBody({
