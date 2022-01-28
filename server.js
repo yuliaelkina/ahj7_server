@@ -76,5 +76,15 @@ class Message {
 const chat = new Chat();
 const testMessage = new Message('admin', ' Добро пожаловать в чат');
 
+router.delete('/', async(ctx, next) => {
+  const index = chat.users.findIndex(({nickname}) => {
+    nickname === ctx.request.body;
+  });
+  if (index !== -1) {
+    chat.users.splice(index, 1);
+  };
+  ctx.response.status = 204;
+});
+
 
 const server = http.createServer(app.callback()).listen(port);
