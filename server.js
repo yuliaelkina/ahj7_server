@@ -3,7 +3,7 @@ const Koa = require('koa');
 const koaBody = require('koa-body');
 const app = new Koa();
 const cors = require('koa2-cors');
-const port = process.env.PORT || 7070
+const port = process.env.PORT || 7070;
 
 app.use(koaBody({
     urlencoded: true,
@@ -12,88 +12,86 @@ app.use(koaBody({
     json: true,
 }));
 
-class Ticket {
-    constructor(name, status, id, created) {
-      this.name = name;
-      this.status = status;
-      this.created = created;
-      this.id = id;
-    }
-};
+app.use(
+  cors({
+    origin: '*',
+    credentials: true,
+    'Access-Control-Allow-Origin': '*',
+    allowMethods: ['GET', 'POST', 'PUT', 'DELETE','OPTIONS'],
+  })
+);
 
-class FullTicket {
-    constructor(name, status, description, id) {
-      this.name = name;
-      this.status = status;
-      this.description = description;
-      this.id = id;
-      this.created = new Date().getTime();
-    }
-
-    createTicket() {
-      return new Ticket(this.name, this.status, this.id, this.created);
-    }
-
-};
-
-class TicketsController {
+class Chat {
   constructor() {
-    this.index = 1000;
-    this.tickets = [];
-    this.fullTickets = [];
+    this.users = [];
+    this.messages = [];
   }
-
-  createTickets(name, status, description) {
-    return `${name}, ${status}, ${description}`;
-   //const ticket = new FullTicket(name, status, description, this.id);
-    //this.id += 1;
-    //this.fullTickets.push(ticket);
-    //this.tickets.push(ticket.createTicket());
-  }
-
-  deleteTickets(id) {
-    if (tickets[id]) {
-      this.tickets.splise(this.tickets.findIndex((el) => {
-        el.id = id;
-      }), 1);
-      this.fullTickets.splise(this.fullTickets.findIndex((el) => {
-        el.id = id;
-      }), 1);
-      return "deleted";
-    } else {
-      return "Ticket with this Id doesn't exist"
+  addUser(nickname) {
+    if (this.users.includes(nickname)) {
+      return 'nickname has already exist';
     }
+    this.users.push(nickname);
+    return 'ok';
+  }
+  deleteUser(Nickname) {
+    const index = this.users.indexOf(el => {
+      el == Nickname;
+    });
+    this.users.splice(index, 1);
   }
 
-  findTicket(string) {
-    return string;
-  }; 
+  addMessage(nickname, messageText) {
+    const message = new Message(nickname, messageText);
+    this.messages.push(message);
+  }
+  
+  returnMessageList() {
+    const list = [];
+    this.messages.forEach((el) => {
+      list.push(el.returnMessage());
+    });
+    return list;
+  }
+  
+};
+class Message {
+  constructor (nickname, messageText) {
+    this.nickName = nickname;
+    this.text = messageText;
+    this.date = this.addDate();
+  }
 
+  addDate() {
+    const now = new Date();
+    return `${now.getHours}:${now.getMinutes} ${now.getDate}.${now.getMonth}.${now.getFullYear}`
+  }
+
+  returnMessage() {
+    return {nickname: `${this.nickName}`, time: `${this.text}`, date: `${this.date}`}
+  }
 }
-const ticketsController = new TicketsController();
-ticketsController.createTickets('Task1', 'false', 'Task 1 description should be here');
-ticketsController.createTickets('Task2', 'false', 'Task 2 description should be here');
+
+const chat = new Chat();
+const testMessage = new Message('admin', ' Добро пожаловать в чат');
+
 
 
 app.use(async ctx => {
-  ctx.response.set({
-    'Access-Control-Allow-Origin': '*',
-  });
   let method;
   if (ctx.request.method === 'GET') ({ method } = ctx.request.query);
   else if (ctx.request.method === 'POST') ({ method } = ctx.request.body);
   switch (method) {
     case 'allTickets': ctx.response.body = ticketsController.tickets;
       break;
-    case 'ticketById': ctx.response.body = findTicket(id);
+    case 'ticketById': ctx.response.body = ticketsController.findTicket(ctx.request.query.id);
       break;
-    case 'createTicket': ctx.response.body = ticketsController.createTickets(name, status, description);
+    case 'createTicket': ctx.response.body = ticketsController.createTickets(ctx.request.body.name, 'false', ctx.request.body.description);
       break;
-    case 'changeStatus': ctx.response.body = ticketsController.changeStatus(ctx.request.body);
+    case 'changeStatus': ctx.response.body = ticketsController.changeStatus(ctx.request.body.id, ctx.request.body.status);
       break;
-    case 'updateTicket': ctx.response.body = ticketsController.updateTicket(ctx.request.body);
+    case 'updateTicket': ctx.response.body = ticketsController.updateTicket(ctx.request.body.id, ctx.request.body.name, ctx.request.body.description);
       break;
-    case 'deleteTicket': ctx.response.body = ticketsController.deleteTicket(ctx.request.body);
+    case 'deleteTicket': ctx.response.body = ticketsController.deleteTickets(ctx.request.body.id);
       break;
     default:
       ctx.response.status = 400;
