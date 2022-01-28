@@ -76,13 +76,20 @@ class Message {
 const chat = new Chat();
 const testMessage = new Message('admin', ' Добро пожаловать в чат');
 
-router.delete('/', async(ctx, next) => {
-  const index = chat.users.findIndex(({nickname}) => {
-    nickname === ctx.request.body;
-  });
-  if (index !== -1) {
-    chat.users.splice(index, 1);
-  };
+router.post('', async(ctx, next) => {
+  if(chat.users.addUser(ctx.request.body) === 'ok') {
+  ctx.response.status = 204;
+  } else 
+  ctx.response.status = 400;
+});
+
+router.post('/message', async(ctx, next) => {
+  chat.addMessage(ctx.request.body);
+  ctx.response.status = 204;
+});
+
+router.delete('/:nickname', async(ctx, next) => {
+  const index = chat.deleteUser(ctx.params.nickName);
   ctx.response.status = 204;
 });
 
