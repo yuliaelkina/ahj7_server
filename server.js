@@ -1,8 +1,8 @@
-import { createServer } from 'http';
-import Koa from 'koa';
-import Router from 'koa-router';
-import koaBody from 'koa-body';
-import cors from 'koa2-cors';
+const http = require('http');
+const Koa = require('koa');
+const Router = require('koa-router');
+const koaBody = require('koa-body');
+const cors = require('koa2-cors');
 const app = new Koa();
 const router = new Router();
 const port = process.env.PORT || 7070;
@@ -94,4 +94,4 @@ router.delete('/:nickname', async(ctx, next) => {
 });
 
 
-const server = createServer(app.callback()).listen(port);
+const server = http.createServer(app.callback()).listen(port);
